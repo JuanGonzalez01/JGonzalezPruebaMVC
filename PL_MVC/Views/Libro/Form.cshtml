@@ -1,0 +1,126 @@
+﻿@model ML.Libro
+
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <br />
+    <h2 class="text-center">Formulario</h2>
+    <br />
+
+    <div class="row">
+
+        <div class="col-md-12">
+            @using (Html.BeginForm("Form", "Libro", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="form-horizontal">
+
+                    <div class="row">
+                        <div class="form-control hidden">
+                            @Html.LabelFor(Model => Model.IdLibro, new { @class = "hidden form-control" })
+                            @Html.TextBoxFor(Model => Model.IdLibro, new { @class = "hidden form-control" })
+                            @Html.ValidationMessageFor(Model => Model.IdLibro)
+                        </div>
+
+                        <div class="col-md-2">
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @Html.Label("Nombre:")
+                                <div class="input-group">
+                                    <span class="input-group-addon glyphicon glyphicon-book"></span>
+                                    @Html.TextBoxFor(Model => Model.Nombre, new { @class = "form-control", @id = "txtNombre" })
+                                </div>
+                                @Html.ValidationMessageFor(Model => Model.Nombre)
+                            </div>
+
+                            <div class="form-group">
+                                @Html.Label("Autor:")
+                                <div class="input-group">
+                                    <span class="input-group-addon glyphicon glyphicon-user"></span>
+                                    @Html.DropDownListFor(model => model.Autor.IdAutor, new SelectList(Model.Autor.Autores, "IdAutor", "Nombre"), "- Selecciona un autor", new { id = "ddlAutor", @class = "form-control" })
+                                </div>
+                                @Html.ValidationMessageFor(Model => Model.Autor.IdAutor)
+                            </div>
+
+                            <div class="form-group">
+                                @Html.Label("Número de páginas:")
+                                <div class="input-group">
+                                    <span class="input-group-addon glyphicon glyphicon-list-alt"></span>
+                                    @Html.TextBoxFor(Model => Model.NumeroPaginas, new { @class = "form-control", @id = "txtNumeroPaginas", type = "number", min = "1" })
+                                </div>
+                                @Html.ValidationMessageFor(Model => Model.NumeroPaginas)
+                            </div>
+
+                            <div class="form-group">
+                                @Html.Label("Fecha de publicación:")
+                                <div class="input-group">
+                                    <span class="input-group-addon glyphicon glyphicon-calendar"></span>
+                                    @Html.TextBoxFor(Model => Model.FechaPublicacion, new { @class = "form-control", placeholder = "DD-MM-AAAA", @id = "datepicker" })
+                                </div>
+                                @Html.ValidationMessageFor(Model => Model.FechaPublicacion)
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @Html.Label("Editorial:")
+                                <div class="input-group">
+                                    <span class="input-group-addon glyphicon glyphicon-print"></span>
+                                    @Html.DropDownListFor(model => model.Editorial.IdEditorial, new SelectList(Model.Editorial.Editoriales, "IdEditorial", "Nombre"), "- Selecciona una editorial", new { id = "ddlEditorial", @class = "form-control" })
+                                </div>
+                                @Html.ValidationMessageFor(Model => Model.Editorial.IdEditorial)
+                            </div>
+
+                            <div class="form-group">
+                                @Html.Label("Edición:")
+                                <div class="input-group">
+                                    <span class="input-group-addon glyphicon glyphicon-tags"></span>
+                                    @Html.TextBoxFor(Model => Model.Edicion, new { @class = "form-control", @id = "txtEdicion" })
+                                </div>
+                                @Html.ValidationMessageFor(Model => Model.Edicion)
+                            </div>
+
+                            <div class="form-group">
+                                @Html.Label("Género:")
+                                <div class="input-group">
+                                    <span class="input-group-addon glyphicon glyphicon-fire"></span>
+                                    @Html.DropDownListFor(model => model.Genero.IdGenero, new SelectList(Model.Genero.Generos, "IdGenero", "Nombre"), "- Selecciona un género", new { id = "ddlGenero", @class = "form-control" })
+                                </div>
+                                @Html.ValidationMessageFor(Model => Model.Genero.IdGenero)
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <br />
+
+                <div class="row">
+                    <div class="col-md-4">
+                    </div>
+
+                    <div class="col-md-2 text-center">
+                        <input type="submit" value="Guardar" class="btn btn-success btn-lg" />
+                    </div>
+                    <div class="col-md-2 text-center">
+                        @Html.ActionLink("Regresar", "GetAll", "Libro", htmlAttributes: new { @class = "btn btn-danger btn-lg" })
+                    </div>
+
+                    <div class="col-md-4">
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
